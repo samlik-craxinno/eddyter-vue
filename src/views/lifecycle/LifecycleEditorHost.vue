@@ -1,16 +1,13 @@
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, ref } from 'vue'
 import { EddyterEditor } from 'richtext-core-vue'
+import { eddyterApiKey } from '../../config/eddyter'
 
 const emit = defineEmits<{
   bridgeMounted: []
   bridgeUnmounting: []
   editorLifecycle: [phase: string, detail?: unknown]
 }>()
-
-const apiKey =
-  import.meta.env.VITE_EDDYTER_API_KEY ??
-  'eddyt_6mFaEEGvGtK6rvu1CR8IFlsjosLQApohJ9G06oVT83b4GROaXIqyQrWDUPoqV14ZW8tI44KpLSeVoUuezdCvPuvgfI'
 
 const content = ref('<p>Editor inside dynamic host — toggle visibility or recreate to test lifecycle.</p>')
 
@@ -31,7 +28,7 @@ function emitEditor(phase: string, detail?: unknown) {
   <div class="lifecycle-host">
     <EddyterEditor
       v-model="content"
-      :api-key="apiKey"
+      :api-key="eddyterApiKey"
       mode="edit"
       class="lifecycle-host__eddyter"
       editor-class="lifecycle-host__eddyter-inner"

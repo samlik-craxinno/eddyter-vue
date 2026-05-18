@@ -1,10 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { EddyterEditor } from 'richtext-core-vue'
-
-const apiKey =
-  import.meta.env.VITE_EDDYTER_API_KEY ??
-  'eddyt_6mFaEEGvGtK6rvu1CR8IFlsjosLQApohJ9G06oVT83b4GROaXIqyQrWDUPoqV14ZW8tI44KpLSeVoUuezdCvPuvgfI'
+import { eddyterApiKey } from '../config/eddyter'
 
 const excerptHtml = ref('<p><em>Excerpt</em> — short summary for listings.</p>')
 const bodyHtml = ref('<p><strong>Body</strong> — main article content.</p>')
@@ -36,7 +33,7 @@ function logEditor(slot: EditorSlot, event: string, detail?: unknown) {
       <h2 class="multi-editors__block-title">Excerpt</h2>
       <EddyterEditor
         v-model="excerptHtml"
-        :api-key="apiKey"
+        :api-key="eddyterApiKey"
         mode="edit"
         class="multi-editors__eddyter"
         editor-class="multi-editors__eddyter-inner"
@@ -58,7 +55,7 @@ function logEditor(slot: EditorSlot, event: string, detail?: unknown) {
       <h2 class="multi-editors__block-title">Body</h2>
       <EddyterEditor
         v-model="bodyHtml"
-        :api-key="apiKey"
+        :api-key="eddyterApiKey"
         mode="edit"
         class="multi-editors__eddyter"
         editor-class="multi-editors__eddyter-inner"
@@ -80,7 +77,7 @@ function logEditor(slot: EditorSlot, event: string, detail?: unknown) {
       <h2 class="multi-editors__block-title">SEO</h2>
       <EddyterEditor
         v-model="seoHtml"
-        :api-key="apiKey"
+        :api-key="eddyterApiKey"
         mode="edit"
         class="multi-editors__eddyter"
         editor-class="multi-editors__eddyter-inner"

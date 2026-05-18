@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref, watch } from 'vue'
 import { EddyterEditor } from 'richtext-core-vue'
+import { eddyterApiKey } from '../config/eddyter'
 
 const STORAGE_TITLE = 'basic-editor:title'
 const STORAGE_HTML = 'basic-editor:html'
@@ -18,10 +19,6 @@ function loadInitial(): { title: string; html: string } {
 const initial = loadInitial()
 const title = ref(initial.title)
 const content = ref(initial.html)
-
-const apiKey =
-  import.meta.env.VITE_EDDYTER_API_KEY ??
-  'eddyt_6mFaEEGvGtK6rvu1CR8IFlsjosLQApohJ9G06oVT83b4GROaXIqyQrWDUPoqV14ZW8tI44KpLSeVoUuezdCvPuvgfI'
 
 let saveTimer: ReturnType<typeof setTimeout> | null = null
 
@@ -81,7 +78,7 @@ onUnmounted(() => {
         <h2 class="basic-editor__panel-title">Editor</h2>
         <EddyterEditor
           v-model="content"
-          :api-key="apiKey"
+          :api-key="eddyterApiKey"
           mode="edit"
           class="basic-editor__eddyter"
           editor-class="basic-editor__eddyter-inner"
