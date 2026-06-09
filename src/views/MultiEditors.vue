@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { EddyterEditor } from 'richtext-core-vue'
+import { EddyterEditor } from '@eddyter/vue'
 import { eddyterApiKey } from '../config/eddyter'
 
 const excerptHtml = ref('<p><em>Excerpt</em> — short summary for listings.</p>')

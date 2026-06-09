@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, ref } from 'vue'
-import { EddyterEditor } from 'richtext-core-vue'
+import { EddyterEditor } from '@eddyter/vue'
 import { eddyterApiKey } from '../../config/eddyter'
 
 const props = defineProps<{

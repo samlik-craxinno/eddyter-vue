@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref, watch } from 'vue'
-import { EddyterEditor } from 'richtext-core-vue'
+import { EddyterEditor } from '@eddyter/vue'
 import { eddyterApiKey } from '../config/eddyter'
 
 const STORAGE_TITLE = 'basic-editor:title'
@@ -16,9 +16,26 @@ function loadInitial(): { title: string; html: string } {
   }
 }
 
+const STORAGE_DARK = 'basic-editor:dark'
+
+function loadDarkMode(): boolean {
+  if (typeof window === 'undefined') return true
+  const stored = localStorage.getItem(STORAGE_DARK)
+  if (stored !== null) return stored === 'true'
+  return window.matchMedia('(prefers-color-scheme: dark)').matches
+}
+
 const initial = loadInitial()
 const title = ref(initial.title)
 const content = ref(initial.html)
+const isDark = ref(loadDarkMode())
+
+function toggleDarkMode() {
+  isDark.value = !isDark.value
+  if (typeof window !== 'undefined') {
+    localStorage.setItem(STORAGE_DARK, String(isDark.value))
+  }
+}
 
 let saveTimer: ReturnType<typeof setTimeout> | null = null
 
@@ -60,7 +77,17 @@ onUnmounted(() => {
 <template>
   <div class="basic-editor">
     <header class="basic-editor__header">
-      <h1 class="basic-editor__title">Basic editor</h1>
+      <div class="basic-editor__header-row">
+        <h1 class="basic-editor__title">Basic editor</h1>
+        <button
+          type="button"
+          class="basic-editor__theme-toggle"
+          :aria-pressed="isDark"
+          @click="toggleDarkMode"
+        >
+          {{ isDark ? 'Light mode' : 'Dark mode' }}
+        </button>
+      </div>
       <label class="basic-editor__label">
         <span class="basic-editor__label-text">Title</span>
         <input
@@ -85,7 +112,7 @@ onUnmounted(() => {
           :toolbar="{ mode: 'static' }"
           :editor="{ maxHeight: '420px' }"
           :mentionUserList="['Sam']"
-          darkMode="true"
+          :dark-mode="isDark"
           @ready="logEditor('ready')"
           @focus="logEditor('focus')"
           @blur="logEditor('blur')"
@@ -114,9 +141,40 @@ onUnmounted(() => {
   margin-bottom: 1.5rem;
 }
 
+.basic-editor__header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
 .basic-editor__title {
   font-size: 1.75rem;
-  margin: 0 0 1rem;
+  margin: 0;
+}
+
+.basic-editor__theme-toggle {
+  padding: 0.45rem 0.85rem;
+  border: 1px solid var(--border, #ccc);
+  border-radius: 8px;
+  background: var(--bg, #fff);
+  color: var(--text-h, inherit);
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.basic-editor__theme-toggle:hover {
+  border-color: var(--accent-border, #9333ea);
+  background: var(--accent-bg, rgba(147, 51, 234, 0.1));
+}
+
+.basic-editor__theme-toggle:focus-visible {
+  outline: 2px solid var(--accent, #9333ea);
+  outline-offset: 2px;
 }
 
 .basic-editor__label {
