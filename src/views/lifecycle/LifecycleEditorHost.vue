@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, ref } from 'vue'
-import { EddyterEditor } from '@eddyter/vue'
+import { Eddyter } from '@eddyter/vue'
 import { eddyterApiKey } from '../../config/eddyter'
 
 const emit = defineEmits<{
@@ -26,7 +26,7 @@ function emitEditor(phase: string, detail?: unknown) {
 
 <template>
   <div class="lifecycle-host">
-    <EddyterEditor
+    <Eddyter
       v-model="content"
       :api-key="eddyterApiKey"
       mode="edit"

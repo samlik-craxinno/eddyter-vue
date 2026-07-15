@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
-import { EddyterEditor } from '@eddyter/vue'
+import { Eddyter } from '@eddyter/vue'
 import { eddyterApiKey } from '../../config/eddyter'
 
 const props = defineProps<{
@@ -67,7 +67,7 @@ onBeforeUnmount(() => {
       </span>
     </div>
 
-    <EddyterEditor
+    <Eddyter
       v-model="html"
       :api-key="eddyterApiKey"
       mode="edit"

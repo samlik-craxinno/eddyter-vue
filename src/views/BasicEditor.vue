@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref, watch } from 'vue'
-import { EddyterEditor } from '@eddyter/vue'
+import { Eddyter } from '@eddyter/vue'
 import { eddyterApiKey } from '../config/eddyter'
 
 const STORAGE_TITLE = 'basic-editor:title'
@@ -103,7 +103,7 @@ onUnmounted(() => {
     <div class="basic-editor__grid">
       <section class="basic-editor__panel">
         <h2 class="basic-editor__panel-title">Editor</h2>
-        <EddyterEditor
+        <Eddyter
           v-model="content"
           :api-key="eddyterApiKey"
           mode="edit"

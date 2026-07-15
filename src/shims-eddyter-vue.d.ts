@@ -8,7 +8,7 @@ declare module '@eddyter/vue' {
     EddyterToolbarConfig,
   } from '@eddyter/core'
 
-  export interface EddyterEditorProps {
+  export interface EddyterProps {
     modelValue?: string
     apiKey: string
     customVerifyKey?: (key: string) => Promise<EddyterApiResponse>
@@ -27,13 +27,16 @@ declare module '@eddyter/vue' {
     enableReactNativeBridge?: boolean
   }
 
-  export interface EddyterEditorExposed {
+  export interface EddyterExposed {
     getInstance(): EddyterInstance | null
   }
 
-  export const EddyterEditor: DefineComponent<
-    EddyterEditorProps,
-    EddyterEditorExposed,
+  export const Eddyter: DefineComponent<
+    EddyterProps,
+    EddyterExposed,
     unknown
   >
+
+  const plugin: { install: (app: import('vue').App) => void }
+  export default plugin
 }

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { EddyterEditor } from '@eddyter/vue'
+import { Eddyter } from '@eddyter/vue'
 import { eddyterApiKey } from '../config/eddyter'
 
 const excerptHtml = ref('<p><em>Excerpt</em> — short summary for listings.</p>')
@@ -31,7 +31,7 @@ function logEditor(slot: EditorSlot, event: string, detail?: unknown) {
 
     <section class="multi-editors__block">
       <h2 class="multi-editors__block-title">Excerpt</h2>
-      <EddyterEditor
+      <Eddyter
         v-model="excerptHtml"
         :api-key="eddyterApiKey"
         mode="edit"
@@ -53,7 +53,7 @@ function logEditor(slot: EditorSlot, event: string, detail?: unknown) {
 
     <section class="multi-editors__block">
       <h2 class="multi-editors__block-title">Body</h2>
-      <EddyterEditor
+      <Eddyter
         v-model="bodyHtml"
         :api-key="eddyterApiKey"
         mode="edit"
@@ -75,7 +75,7 @@ function logEditor(slot: EditorSlot, event: string, detail?: unknown) {
 
     <section class="multi-editors__block">
       <h2 class="multi-editors__block-title">SEO</h2>
-      <EddyterEditor
+      <Eddyter
         v-model="seoHtml"
         :api-key="eddyterApiKey"
         mode="edit"

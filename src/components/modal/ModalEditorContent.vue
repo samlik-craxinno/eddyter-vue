@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, ref } from 'vue'
-import { EddyterEditor } from '@eddyter/vue'
+import { Eddyter } from '@eddyter/vue'
 import { eddyterApiKey } from '../../config/eddyter'
 
 const props = defineProps<{
@@ -33,7 +33,7 @@ onBeforeUnmount(() => emit('lifecycle', 'destroyed'))
 
 <template>
   <div class="modal-editor-content">
-    <EddyterEditor
+    <Eddyter
       v-model="content"
       :api-key="eddyterApiKey"
       mode="edit"
